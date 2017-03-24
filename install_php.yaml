@@ -1,0 +1,33 @@
+---
+- name: Install PHP
+  hosts: all
+  become: yes
+  become_method: sudo
+  # remote_user: vagrant # login as
+  # become_user: postgres # become different user
+  tasks:
+    - name: install PHP module for Apache
+      apt: name=libapache2-mod-php state=present
+
+    - name: enable mod_rewrite Apache module
+      apache2_module: name=rewrite state=present         
+
+    - name: install PHP
+      apt: name=php update_cache=yes state=latest force=yes
+
+    - name: install PHP packages
+      apt: name={{ item }} update_cache=yes state=latest force=yes
+      with_items:
+        - php-cli
+        - php-curl
+        - php-fpm
+        - php-intl
+        - php-json
+        - php-mcrypt
+        # - php-xdebug
+        #- php-sqlite
+        - sqlite3
+
+    - name: make sure apache2 service is running
+      service: name=apache2 state=running
+...

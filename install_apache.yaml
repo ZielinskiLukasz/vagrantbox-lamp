@@ -1,0 +1,17 @@
+---
+- name: Install Apache webserver
+  hosts: all
+  become: yes
+  become_method: sudo
+  # remote_user: vagrant # login as
+  # become_user: postgres # become different user
+  tasks:
+    - name: install latest version of apache2
+      apt: name=apache2 update_cache=yes state=latest force=yes
+
+    - name: enable mod_rewrite apache module
+      apache2_module: name=rewrite state=present      
+
+    - name: make sure apache2 service is running
+      service: name=apache2 state=running      
+...

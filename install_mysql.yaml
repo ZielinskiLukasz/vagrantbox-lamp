@@ -1,0 +1,13 @@
+---
+- name: Install MySQL and PHPMyAdmin
+  hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: run MySQL and PHPMyAdmin install script
+      script: ./mysql_setup.sh
+
+    - name: Force restart apache
+      action: service name=apache2 state=restarted   
+...

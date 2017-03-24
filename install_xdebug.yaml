@@ -1,0 +1,12 @@
+---
+- name: Install Xdebug
+  hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: run custom Xdebug install script
+    script: ./xdebug_setup.sh
+
+  - name: Force restart apache
+    action: service name=apache2 state=restarted   
+...
