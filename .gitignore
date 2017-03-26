@@ -1,0 +1,5 @@
+.vagrant/*
+.directory
+/html/.project
+/html/*.sublime*
+
