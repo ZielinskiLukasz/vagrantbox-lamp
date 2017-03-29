@@ -1,0 +1,17 @@
+---
+#- name: Top level playbook
+  #remote_user: vagrant
+  #hosts: all
+  #become: yes
+  #become_method: sudo
+  #tasks:
+  #  - name: Start top-level play
+  #    tags: foo
+  #    shell: echo abc
+
+- include: install_apache.yaml
+- include: install_php.yaml
+- include: apache_web_dir.yaml
+- include: install_xdebug.yaml
+- include: install_mysql.yaml
+...
