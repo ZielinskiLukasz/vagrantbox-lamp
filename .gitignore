@@ -2,4 +2,5 @@
 .directory
 /html/.project
 /html/*.sublime*
+playbook.retry
 
