@@ -1,0 +1,20 @@
+---
+- name: Create symlink to ~/html subdirectory
+  hosts: all
+  become: yes
+  become_method: sudo
+  remote_user: vagrant # login as
+  # become_user: postgres # become different user
+  tasks:
+    - name: Create /vagrant/html web-directory
+      file: path=/vagrant/html state=directory
+
+    - name: Remove existing '/var/www/html' default apache directory
+      file: path=/var/www/html state=absent  
+
+    - name: Make symbolic link from '/vagrant/html' to '/var/www/html'
+      file: src=/vagrant/html dest=/var/www/html state=link
+      
+    # - name: Force restart apache
+      # action: service name=apache2 state=restarted      
+...
